@@ -29,27 +29,6 @@ class DishDetail extends Component {
 
     renderComments(comments) {
 
-        //MyCode
-        // if(comments != null) {
-
-        //     const cmnt = comments.map(comment => {
-
-        //         console.log(comment.author);
-        //         return (
-        //             <p>{comment.comment}</p>
-        //         )    
-                
-        //     })
-
-        // }
-        // else {
-        //     return(
-        //         <div></div>
-        //     )
-        // }
-
-
-        //ReferenceCode
         if(comments == null) {
             return (<div></div>)
         }
@@ -86,7 +65,7 @@ class DishDetail extends Component {
 
     render() {
 
-        const dishdetail = this.props.dishdetail;
+        const dishdetail = this.props.dish;
 
         if(dishdetail != null) {
 
