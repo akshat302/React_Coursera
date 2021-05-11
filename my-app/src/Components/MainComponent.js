@@ -1,8 +1,11 @@
-import React, {Component} from 'react'
-import { Navbar, NavbarBrand } from 'reactstrap';
+import React, {Component} from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Menu from './MenuComponent';
 import {DISHES} from '../shared/dishes';
+import Header from './HeaderComponent';
 import DishDetail from './DishdetailComponent';
+import Home from './HomeComponent';
+import Footer from './FooterComponent';
 
 
 class Main extends Component {
@@ -17,23 +20,37 @@ class Main extends Component {
     };
   }
 
-  onDishSelect(dishId) {
-    this.setState({ selectedDish:dishId });
-  }
+  // onDishSelect(dishId) {
+  //   this.setState({ selectedDish:dishId });
+  // }
 
   render() {
+
+    // Another Way to supply a component by explicitly declaring here
+    // The first way is to pass it directly in the component as in Menu Component
+
+    const HomePage = () => {
+
+      return(
+        <Home />
+      )
+    }
+
     return (
       <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Hello World</NavbarBrand>
-          </div>
-        </Navbar>
-        <Menu dishes={this.state.dishes}
-          onClick = { (dishId) => this.onDishSelect(dishId) } /> {/* dishes made available as props to my MenuComponent */}
-        <DishDetail 
-          dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish )[0]} />
+        <Header />
+
+        {/* Switch to enclose all our routes into our main component */}
+
+        <Switch> 
+          <Route path="/home" component={HomePage} />
+          <Route exact path="/menu" component={ () => <Menu dishes={this.state.dishes} /> } />
+          <Redirect to="/home" /> 
+        </Switch>
+ 
+        <Footer />
       </div>
+      
     );
   }
 
